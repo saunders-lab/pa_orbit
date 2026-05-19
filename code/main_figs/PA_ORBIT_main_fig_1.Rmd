@@ -1,0 +1,168 @@
+---
+title: "PA ORBIT - Main Fig 1"
+author: 'Scott H. Saunders'
+date: '2026'
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    code_folding: show
+    toc: yes
+    df_print: paged
+---
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(patchwork)
+library(cowplot)
+
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=FALSE, echo = TRUE, message=FALSE, warning=FALSE, fig.align="center", fig.retina = 2)
+
+theme_figure <- function () {
+  theme_classic( ) %+replace%
+    theme(
+      axis.line = element_line(color = 'black', size = 0.25),
+      axis.ticks = element_line(color = 'black', size =0.25),
+      axis.text = element_text(color = 'black', size=7),
+      axis.title=element_text(color = 'black', size=7),
+      strip.text = element_text(color = 'black', size = 7),
+      strip.background = element_blank(),
+      legend.background = element_blank(),
+      legend.title=element_text(color = 'black',size=7),
+      legend.text=element_text(color = 'black',size=7),
+      legend.text.align=0,
+      panel.spacing = unit(0,'cm'),
+      plot.margin = margin(t=0.25, b = 0.25, l = 0.25, r = 0.25, unit = 'cm'),
+      plot.title = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.subtitle = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.caption = element_text(color = 'black', size = 8)
+    )
+}
+
+theme_set(theme_figure())
+```
+
+
+# Fig. 1C
+
+```{r}
+df_len <- read_csv("../../data/low_throughput/2025_12_09_metX_hisA_oligo_len_eff.csv") %>% 
+  mutate(eff = Carb300 / LB) %>% 
+  mutate(oligo_len = factor(oligo_len, levels = c('none','74','90','104','120','150')))
+
+df_len
+```
+
+```{r}
+plot_len <- ggplot(df_len, aes(x = oligo_len, y = eff, color = locus)) + stat_summary(geom = 'point') + geom_jitter(shape = 21, width = 0.1, height = 0) +
+  geom_path(data = . %>% group_by(locus, oligo_len) %>% summarise(avg_eff = mean(eff)), aes(y = avg_eff, group = locus)) + scale_y_log10()+
+  scale_color_manual(values = c('#738FC1', '#D56C55'))+
+  labs(x = 'Oligo length (bases)', y = 'Efficiency')+
+    guides(color = 'none')
+
+plot_len
+```
+
+
+# Fig. 1D
+
+```{r}
+df_lag <- read_csv("../../data/low_throughput/2025_12_23_lead_lag_eff.csv")
+
+df_lag
+```
+
+```{r}
+plot_lag <- ggplot(df_lag, aes(x = lead_lag_strand, y = eff, color = locus)) + 
+  #geom_point(position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.2), shape = 21) + 
+  #stat_summary(position = position_dodge(width = 0.2)) + 
+  geom_jitter(width = 0.1, shape = 21) + 
+  stat_summary() + 
+  scale_y_log10(label = scales::label_log()) +
+  labs(x = 'locus', y = 'Efficiency') + facet_wrap(~locus, scales = 'free_x')+
+  scale_color_manual(values = c('#738FC1', '#D56C55','gray')) +
+  guides(color = 'none')
+
+plot_lag
+```
+
+# Fig. 1E
+
+```{r}
+df_oligo_amount <- read_csv("../../data/low_throughput/2025_12_23_metX_hisA_oligo_amount.csv") %>% 
+  mutate(eff = carb / LB)
+
+df_oligo_amount
+```
+
+```{r}
+plot_oligo_amount <-   ggplot(df_oligo_amount, aes(x = factor(oligo_amount_pmol), y = eff, color = locus)) + geom_point(position = position_jitterdodge(jitter.width = 0.1, dodge.width = 0.5), shape = 21) + stat_summary(position = position_dodge(width = 0.5)) + scale_y_log10() +
+  labs(x = 'Oligo amount (pmol)', y = 'Efficiency')+
+    scale_color_manual(values = c('#738FC1', '#D56C55','gray'))+
+    guides(color = 'none')
+
+plot_oligo_amount
+```
+
+# Fig. 1F
+
+```{r}
+df_pint_amount <- read_csv("../../data/low_throughput/2025_12_23_metX_hisA_pInt_amount.csv")%>% 
+  mutate(eff = carb / LB)
+
+df_pint_amount
+```
+
+```{r}
+plot_pint <- ggplot(df_pint_amount, aes(x = plasmid_amount_ng, y = eff, color = locus)) + stat_summary(geom = 'point') + geom_jitter(shape = 21, width = 0.1, height = 0) +
+  geom_path(data = . %>% group_by(locus, plasmid_amount_ng) %>% summarise(avg_eff = mean(eff)), aes(y = avg_eff, group = locus)) + scale_y_log10()+
+  labs(x = 'Plasmid amount (ng)', y = 'Efficiency')+
+    scale_color_manual(values = c('#738FC1', '#D56C55','gray'))+
+    guides(color = 'none')
+
+plot_pint
+```
+
+# Assemble figure
+
+```{r}
+theme_figure <- function () {
+  theme_classic( ) %+replace%
+    theme(
+      axis.line = element_line(color = 'black', size = 0.25),
+      axis.ticks = element_line(color = 'black', size =0.25),
+      axis.text = element_text(color = 'black', size=7),
+      axis.title=element_text(color = 'black', size=7),
+      strip.text = element_text(color = 'black', size = 7),
+      strip.background = element_blank(),
+      legend.background = element_blank(),
+      legend.title=element_text(color = 'black',size=7),
+      legend.text=element_text(color = 'black',size=7),
+      legend.text.align=0,
+      panel.spacing = unit(0,'cm'),
+      plot.margin = margin(t=0.25, b = 0.25, l = 0.25, r = 0.25, unit = 'cm'),
+      plot.title = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.subtitle = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.caption = element_text(color = 'black', size = 8)
+    )
+}
+
+theme_set(theme_figure())
+
+Mb_label <- function(x){
+  #e.g. 2 to 2x
+  lab <- paste(x / 1000000, " Mb", sep = '')
+}
+
+fig_1 <- plot_grid(plot_len ,plot_lag, plot_oligo_amount, plot_pint, ncol = 4, rel_widths = c(1, 1, 1, 1))
+
+fig_1
+
+#save_plot("2025_12_23_PA_ORBIT_fig_1.pdf", fig_1, base_width = 7.24, base_height = 2)
+```
+
+
+```{r}
+sessionInfo()
+
+```

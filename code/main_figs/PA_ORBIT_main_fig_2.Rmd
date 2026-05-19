@@ -1,0 +1,161 @@
+---
+title: "PA ORBIT - Main Fig 2"
+author: 'Scott H. Saunders'
+date: '2026'
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    code_folding: show
+    toc: yes
+    df_print: paged
+---
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(cowplot)
+
+
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=FALSE, echo = TRUE, message=FALSE, warning=FALSE, fig.align="center", fig.retina = 2)
+
+theme_figure <- function () {
+  theme_classic( ) %+replace%
+    theme(
+      axis.line = element_line(color = 'black', size = 0.25),
+      axis.ticks = element_line(color = 'black', size =0.25),
+      axis.text = element_text(color = 'black', size=7),
+      axis.title=element_text(color = 'black', size=7),
+      strip.text = element_text(color = 'black', size = 7),
+      strip.background = element_blank(),
+      legend.background = element_blank(),
+      legend.title=element_text(color = 'black',size=7),
+      legend.text=element_text(color = 'black',size=7),
+      legend.text.align=0,
+      panel.spacing = unit(0,'cm'),
+      plot.margin = margin(t=0.25, b = 0.25, l = 0.25, r = 0.25, unit = 'cm'),
+      plot.title = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.subtitle = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.caption = element_text(color = 'black', size = 8)
+    )
+}
+
+theme_set(theme_figure())
+
+Mb_label <- function(x){
+  #e.g. 2 to 2x
+  lab <- paste(x / 1000000, " Mb", sep = '')
+}
+
+```
+
+
+# Intro
+
+- Fig. 3A Locus diagram
+- Fig. 3B Gold Std Efficiency (R)
+- Fig. 3C Gold Std Accuracy (R)
+- Fig. 3D PCR / diagram
+- Fig. 3E hisA/metX plate phenotypes
+- Fig. 3F Whole genome SNPs (R)
+- Fig. 3G attB/clean diagram / Sanger
+- Fig. 3H attB/clean accuracy (R)
+
+# Fig. 3B Gold std efficiency
+
+```{r}
+
+df_eff <- read_csv("../../data/low_throughput/PA14_hisA_metX_clpP_gold_std_eff_2.csv") %>% 
+    mutate(eff = carb / LB, neg_eff = neg_carb / neg_LB) %>% 
+    mutate(locus = factor(locus, levels = c('hisA','metX','clpP')))
+
+df_eff
+
+plot_eff <-  ggplot(df_eff, aes(x = locus, y = eff, color = locus))+ 
+  geom_jitter(shape = 21, width = 0.1, height = 0) + 
+  stat_summary(geom = 'pointrange', shape = 21) +
+  stat_summary(aes(y= neg_eff), geom = 'pointrange', color = 'gray', shape = 21) + 
+  scale_color_manual(values = c('#738FC1', '#D56C55','#ab85ac')) + 
+  scale_y_log10(labels = scales::label_log()) + 
+  guides(color = 'none') + 
+  labs(x = NULL, y = 'Efficiency')
+
+plot_eff
+```
+
+# Fig. 3C Gold std Accuracy
+
+```{r}
+df_acc <- read_csv("../../data/low_throughput/PA14_hisA_metX_clpP_gold_std_acc.csv") %>% 
+  mutate(per_correct = PCR_pos / total) %>% 
+  mutate(locus = factor(locus, levels = c('hisA','metX','clpP'))) 
+
+df_acc
+
+
+plot_acc <- ggplot(df_acc, aes(x = locus , y = per_correct, color = locus)) + geom_jitter(width = 0.1, height = 0, shape = 21) + 
+  stat_summary(geom = 'pointrange', shape = 21)+
+  scale_color_manual(values = c('#738FC1', '#D56C55','#ab85ac')) + 
+  scale_y_continuous(limits = c(0,1), labels = scales::label_percent()) +guides(color = 'none')+
+  labs(x = NULL, y = 'Colonies correct by PCR')
+
+plot_acc
+```
+
+# Fig. 3F Whole genome SNPs
+
+```{R}
+df_muts <- read_csv("../../data/low_throughput/2026_01_09_PA14_breseq_reanalysis_mut_count.csv") %>% 
+  mutate(locus = factor(locus, levels = c('hisA','metX','clpP','WT'))) %>% 
+  mutate(mutL = factor(mutL, levels = c('-','+')))
+
+df_muts
+
+plot_muts <- ggplot(df_muts, aes(x = locus, y = mutations, color = locus)) + 
+  geom_hline(yintercept = 0, linetype = 2, color = 'black')+
+  geom_jitter(shape = 21, width = 0.1, height = 0, fill = NA)+ 
+  stat_summary(geom = 'pointrange', shape = 21) + 
+  facet_grid(~mutL, scales = 'free_x', space = 'free_x' )+    
+  scale_color_manual(values = c('#738FC1', '#D56C55','#ab85ac', 'gray','#738FC1', '#D56C55')) +
+  guides(color = 'none') +
+  labs(x = NULL, y = 'Mutation count (whole genome sequence)') 
+
+plot_muts
+```
+
+# Fig. 3H attB clean accuracy
+
+```{r}
+df_attB <- tibble(type = c('attB','attB','attB','attB', 'clean','clean','clean','clean'),
+                  locus = c('hisA','hisA','metX','metX','hisA','hisA', 'metX','metX'),
+                  per_correct = c(1, 1, 1, 1, 0, 0.45, 0.5, 0.75))
+
+df_attB
+
+plot_attB <- ggplot(df_attB, aes(x = locus, y = per_correct, color = locus)) + 
+  geom_jitter(width = 0.1, height = 0, shape = 21) + 
+  stat_summary(geom = 'pointrange', shape = 21) +
+  facet_wrap(~type) +
+  scale_y_continuous(limits = c(0, 1), labels = scales::label_percent()) + guides(color = 'none')+
+    scale_color_manual(values = c('#738FC1', '#D56C55')) +
+  labs(x = NULL, y = 'Colonies correct by PCR')
+
+plot_attB
+
+```
+
+# Assemble Fig. 2
+
+```{r}
+fig_2 <- plot_grid(NULL, plot_eff, plot_acc, 
+          NULL, NULL, plot_muts, 
+          NULL, NULL, plot_attB,
+          align = 'hv', axis = 'tblr')
+
+fig_2
+
+#save_plot("PA_ORBIT_main_fig_2.pdf", fig_2, base_width = 5.4, base_height = 5)
+```
+
+```{r}
+sessionInfo()
+```

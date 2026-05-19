@@ -1,0 +1,131 @@
+---
+title: "PA ORBIT - Main Fig 3"
+author: 'Scott H. Saunders'
+date: '2026'
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    code_folding: show
+    toc: yes
+    df_print: paged
+---
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(cowplot)
+library(ggtree)
+library(ape)
+
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=FALSE, echo = TRUE, message=FALSE, warning=FALSE, fig.align="center", fig.retina = 2)
+
+theme_figure <- function () {
+  theme_classic( ) %+replace%
+    theme(
+      axis.line = element_line(color = 'black', size = 0.25),
+      axis.ticks = element_line(color = 'black', size =0.25),
+      axis.text = element_text(color = 'black', size=7),
+      axis.title=element_text(color = 'black', size=7),
+      strip.text = element_text(color = 'black', size = 7),
+      strip.background = element_blank(),
+      legend.background = element_blank(),
+      legend.title=element_text(color = 'black',size=7),
+      legend.text=element_text(color = 'black',size=7),
+      legend.text.align=0,
+      panel.spacing = unit(0,'cm'),
+      plot.margin = margin(t=0.25, b = 0.25, l = 0.25, r = 0.25, unit = 'cm'),
+      plot.title = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.subtitle = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.caption = element_text(color = 'black', size = 8)
+    )
+}
+
+theme_set(theme_figure())
+
+```
+
+Note each panel was saved separately and combined in illustrator.
+
+# Fig. 3B - Phylogeny and genomes
+
+```{r}
+
+df_genomes <- read_delim("../../data/low_throughput/clinical_genomes_fastANI.txt.visual", col_names = c('genome_1','genome_2','ANI','Q1','Q2','Q3','pos_1_start','pos_1_end','pos_2_start','pos_2_end') )
+
+df_lens <- df_genomes %>% 
+  group_by(genome_1) %>% 
+  summarise(genome_len = max(pos_1_end))
+
+df_orth <- df_genomes %>% 
+  filter(genome_2 == 'Pseudomonas_aeruginosa_PAO1_107.fasta') %>% 
+  mutate(frag_len = pos_1_end - pos_1_start) %>% 
+  group_by(genome_1) %>% 
+  summarise(orth_len = sum(frag_len))
+
+left_join(df_orth, df_lens, by = 'genome_1') %>% 
+  mutate(frac_orth = orth_len / genome_len) %>% 
+  mutate(frac_diff = 1-frac_orth) %>% 
+  mutate(length_diff = genome_len - orth_len)
+```
+
+```{r}
+tree <- read.tree("../../data/low_throughput/clinical_genomes_parsnp.tree")
+
+#ggtree(tree)+ geom_tiplab()
+
+tree_2 <- root(tree, outgroup = "Pseudomonas_aeruginosa_PA7_119.fasta")
+
+ggtree(tree_2)+ geom_tiplab()
+
+#ggsave("../2025_11_06_draft_0/figures/clinical_strain_phylogeny.pdf", width = 2, height =2)
+```
+
+# Fig. 3C - Clinical Accuracy
+
+```{r}
+df_clin <- read_csv("../../data/low_throughput/2025_12_23_clinical_acc.csv") %>% 
+  pivot_longer(cols = -strain, names_to = 'locus', values_to = 'accuracy') %>% 
+  mutate(strain = factor(strain))
+
+df_clin
+```
+
+```{r}
+plot_clin <- df_clin %>% 
+  mutate(locus = factor(locus, levels = c('HisA','MetX','ClpP'))) %>% 
+  mutate(strain = factor(strain, levels = c('3301','3146','4041'))) %>% 
+ggplot(aes(x = locus, y = accuracy / 100, fill = locus))+
+  geom_col()+
+  scale_y_continuous(label = scales::label_percent())+
+  facet_wrap(~strain)+
+    scale_fill_manual(values = c('#738FC1', '#D56C55','#ab85ac'))+
+  labs(x = NULL, y = 'Accuracy') + guides(fill = 'none')
+  
+plot_clin
+
+#ggsave('PA_clinical_accuracy.pdf', width = 3, height = 2)
+```
+
+# Fig. 3E - Mex MIC
+
+```{r}
+
+df_mic <- read_csv("../../data/low_throughput/2026_02_06_PA_MIC_mexAC.csv")
+
+df_mic %>% 
+  mutate(locus = factor(locus, levels = c('WT','mexA','mexC'))) %>% 
+  mutate(strain = factor(strain, levels = c('PAO1','PA14','3301'))) %>%
+  mutate(drug = factor(drug, levels = c('Levo','Cef','PipT'))) %>% 
+  filter(drug != 'PipT') %>% 
+ggplot(aes(x = strain, y = locus, fill = MIC)) + geom_tile() + facet_wrap(~drug) +
+  scale_fill_viridis_c(transform = 'log2')
+
+#ggsave('PA_MIC.pdf', width = 3, height = 1.5)
+```
+
+
+```{r}
+
+sessionInfo()
+
+```
