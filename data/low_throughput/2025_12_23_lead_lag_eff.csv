@@ -1,0 +1,11 @@
+﻿locus,lead_lag_strand,eff
+hisA,lag,1.06E-06
+hisA,lag,1.09E-06
+hisA,lead,7.24E-07
+hisA,lead,6.06E-07
+metX,lag,3.26E-06
+metX,lag,2.48E-06
+metX,lead,0.000001
+metX,lead,8.85E-07
+negative_control,none,3.33E-07
+negative_control,none,2.05E-07
