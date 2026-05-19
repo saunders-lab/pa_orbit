@@ -1,0 +1,232 @@
+---
+title: "PA ORBIT - Main Fig. 4"
+author: 'Scott H. Saunders'
+date: '2026'
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    code_folding: show
+    toc: yes
+    df_print: paged
+---
+
+
+```{r  warning=FALSE, message=FALSE}
+library(tidyverse)
+library(ggrepel)
+library(cowplot)
+library(patchwork)
+
+theme_figure <- function () {
+  theme_classic( ) %+replace%
+    theme(
+      axis.line = element_line(color = 'black', size = 0.25),
+      axis.ticks = element_line(color = 'black', size =0.25),
+      axis.text = element_text(color = 'black', size=7),
+      axis.title=element_text(color = 'black', size=7),
+      strip.text = element_text(color = 'black', size = 7),
+      strip.background = element_blank(),
+      legend.background = element_blank(),
+      legend.title=element_text(color = 'black',size=7),
+      legend.text=element_text(color = 'black',size=7),
+      legend.text.align=0,
+      panel.spacing = unit(0,'cm'),
+      plot.margin = margin(t=0.25, b = 0.25, l = 0.25, r = 0.25, unit = 'cm'),
+      plot.title = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.subtitle = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.caption = element_text(color = 'black', size = 8)
+    )
+}
+
+theme_set(theme_figure())
+
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=FALSE, echo = TRUE, message=FALSE, warning=FALSE, fig.align="center", fig.retina = 2)
+
+```
+
+# Fig. 4A CFP degrons
+
+```{r}
+df <- read_csv("../../data/low_throughput/PA_CFP_assay_data.csv")
+
+df
+
+meta <- read_csv("../../data/low_throughput/PA_CFP_assay_meta.csv")
+
+meta
+
+df_long <- df %>% pivot_longer(cols = c(-plate, -signal,-Time,-temp), names_to = 'well', values_to = 'val')
+
+df_long
+
+df_meta <- left_join(df_long, meta, by = 'well') %>% mutate(id = paste(strain, well, ara, sep = '_'))
+
+df_meta
+```
+
+```{r}
+
+df_meta_per <- df_meta %>%
+  group_by(signal, strain, well) %>% 
+  arrange(Time) %>%  
+  mutate(read_num = row_number()) %>% 
+  select(-Time, -temp) %>% 
+  pivot_wider(names_from = signal, values_from = val) %>% 
+  mutate(cfp_per_od = CFP / OD)
+
+df_meta_per
+```
+
+
+```{r}
+df_clp <- read_csv("../../data/low_throughput/PA_delClpP_CFP_assay_data.csv")
+
+df_clp
+
+meta_clp <- read_csv("../../data/low_throughput/PA_delClpP_CFP_assay_meta.csv")
+
+meta_clp
+
+df_clp_long <- df_clp %>% pivot_longer(cols = c(-plate, -signal,-Time,-temp), names_to = 'well', values_to = 'val')
+
+df_clp_long
+
+df_meta_clp <- left_join(df_clp_long, meta_clp, by = 'well') %>% mutate(id = paste(strain, well, ara, sep = '_'))
+
+df_meta_clp
+```
+
+```{r}
+df_meta_per_clp <- df_meta_clp %>%
+  group_by(signal, strain, well) %>% 
+  arrange(Time) %>%  
+  mutate(read_num = row_number()) %>% 
+  select(-Time, -temp) %>% 
+  pivot_wider(names_from = signal, values_from = val) %>% 
+  mutate(cfp_per_od = CFP / OD600)
+
+cfp_norm <- df_meta_per %>% 
+  filter(strain != 'CFP_stop') %>% 
+  group_by(plate, strain, ara, well) %>% 
+  summarise(max_cfp = max(cfp_per_od)) %>% 
+  group_by(strain, ara) %>% 
+  summarise(cfp_baseline = mean(max_cfp)) %>% 
+  filter(strain == 'CFP') %>% 
+  ungroup() %>% 
+  select(-strain)
+
+df_cfp_summary <- df_meta_per %>% 
+  filter(strain != 'CFP_stop') %>% 
+  group_by(plate, strain, ara, well) %>% 
+  summarise(max_cfp = max(cfp_per_od)) %>% 
+  group_by(strain, ara) %>% 
+  mutate(mean_max_cfp = mean(max_cfp)) %>% 
+  left_join(. , cfp_norm, by = 'ara') %>% 
+  mutate(max_cfp_frac = max_cfp / cfp_baseline) %>% 
+  mutate(mean_max_cfp_frac = mean_max_cfp / cfp_baseline) %>% 
+  mutate(strain = factor(strain, levels = c('CFP','CFP_ASV','CFP_LAA','CFP_AAV','CFP_LVA','PA14')))
+
+  
+plot_cfp_norm <- ggplot(df_cfp_summary,aes(x = factor(ara), y = max_cfp_frac, color = strain)) + 
+  geom_jitter(width = 0.1, height = 0, shape = 21) +
+  geom_point(data = . %>% group_by(ara, strain, mean_max_cfp_frac) %>% summarise(), aes(y = mean_max_cfp_frac)) +
+  geom_line(data = . %>% group_by(ara, strain, mean_max_cfp_frac) %>% summarise(), aes(y = mean_max_cfp_frac, group = strain)) +
+    scale_color_manual(values = c('#738FC1',"#EBCDE2", "#CA9FCA", '#977799', '#705B73','black')) +
+  scale_y_continuous(labels = scales::label_percent(), breaks = c(0,0.25, 0.5, 0.75, 1),limits = c(0,1.17)) +
+  labs(x = 'Arabinose inducer (%)', y = 'Fraction of CFP control') +guides(color='none')
+
+plot_cfp_raw <- ggplot(df_cfp_summary %>% filter(strain == 'CFP'), aes(x = factor(ara), y = max_cfp)) + geom_jitter(width =0.1, height = 0, shape = 21, color = '#738FC1') + stat_summary(color = '#738FC1', shape = 21) +
+  ylim(0,NA) +labs(x = NULL, y = 'CFP fluorescence (AU)') + theme(axis.text.x = element_blank())
+
+plot_cfp_raw / plot_cfp_norm + plot_layout(heights = c(1,3))
+
+```
+
+```{r}
+
+cfp_norm_clp <- df_meta_per_clp %>% 
+  #filter(strain != 'CFP_stop') %>% 
+  group_by(plate, strain, ara, well) %>% 
+  summarise(max_cfp = max(cfp_per_od)) %>% 
+  group_by(strain, ara) %>% 
+  summarise(cfp_baseline = mean(max_cfp)) %>% 
+  filter(strain == 'CFP_stop') %>% 
+  ungroup() %>% 
+  select(-strain)
+
+
+
+df_cfp_summary_clp <- df_meta_per_clp %>% 
+  group_by(plate, strain, ara, well) %>% 
+  summarise(max_cfp = max(cfp_per_od)) %>% 
+  group_by(strain, ara) %>% 
+  mutate(mean_max_cfp = mean(max_cfp)) %>% 
+  left_join(. , cfp_norm_clp, by = 'ara') %>% 
+  mutate(max_cfp_frac = max_cfp / cfp_baseline) %>% 
+  mutate(mean_max_cfp_frac = mean_max_cfp / cfp_baseline) %>% 
+  mutate(strain = factor(strain, levels = c('CFP_stop','CFP_ASV','CFP_LAA','CFP_AAV','CFP_LVA','PA14')))
+
+plot_clp <- df_cfp_summary_clp %>% 
+  filter(ara == 0.01) %>% 
+  ggplot(aes(x = factor(ara), y = max_cfp_frac, color = strain))+geom_jitter(width = 0.1, height = 0, shape = 21) +
+  geom_point(data = . %>% group_by(ara, strain, mean_max_cfp_frac) %>% summarise(), aes(y = mean_max_cfp_frac))+
+      scale_color_manual(values = c('#738FC1',"#EBCDE2", "#CA9FCA", '#977799', '#705B73','black'))+
+    scale_y_continuous(labels = scales::label_percent(), breaks = c(0,0.25, 0.5, 0.75, 1), limits = c(0,1.17)) +guides(color='none') +
+  labs(x = NULL, y = NULL)
+
+plot_clp
+```
+
+```{r}
+plot_cfp <- plot_grid(plot_cfp_raw, NULL, plot_cfp_norm, plot_clp, align = 'hv', axis = 'tblr', rel_heights = c(1,2.5), rel_widths = c(3,1))
+
+plot_cfp
+#(plot_cfp_raw | plot_spacer()) / (plot_cfp_norm | plot_clp + plot_layout(widths = c(1,3))) + plot_layout(heights = c(1,3))
+
+#save_plot("PA_CFP_assay.pdf", plot_cfp, base_width = 3, base_height = 2.5)
+```
+
+# Fig. 4D GrpE growth curve
+
+```{r}
+
+#import metadata. Replace file name with your file
+df_metadata <- read_csv("../../data/low_throughput/2026_03_12_PR_metadata.csv") %>% 
+  mutate(id = paste(locus, tag,replicate, sep = '_'))
+
+df_metadata
+
+
+plate_long_LB <- read_csv("../../data/low_throughput/2026_03_12_PA_hypo_LB_PR_overnight_data.csv") %>% 
+  separate(Well, into = c('well_letter','well_num'), sep = '0', remove = F) %>% 
+  mutate(well_num = ifelse(well_num == '', 0, well_num)) %>% 
+  mutate(well_num = ifelse(is.na(well_num), '', well_num)) %>% 
+  mutate(well = paste0(well_letter, well_num))
+
+plate_long_LB
+
+plate_meta_LB <- left_join(plate_long_LB, df_metadata, by = c('well'))
+
+plate_meta_LB
+```
+
+```{r}
+
+plate_meta_LB %>% filter(locus %in% c('grpE','WT_PA14')) %>% 
+  mutate(tag = factor(tag, levels = c('-','stop','ASV','LAA','LVA'))) %>% 
+  filter(Repeat > 1) %>% 
+ggplot(aes(x = Time, y = abs, color = tag, linetype = locus)) + 
+  geom_path(aes(group = well), alpha = 0.25)+
+  geom_smooth()  + #theme_bw() + 
+  scale_color_manual(values = c('black','gray',"#EBCDE2", '#AB85AC', '#705B73'))+
+  scale_x_time(labels = scales::label_timespan())+
+  labs( x= 'Time',  y = 'OD600') + 
+  scale_y_log10() + guides(color = 'none', linetype = 'none')
+
+#ggsave("../../../2025/PA_ORBIT/2025_11_06_draft_0/figures/grpE_LB_PR.pdf", width = 2.25, height = 1.75)
+```
+
+```{r}
+sessionInfo()
+```
