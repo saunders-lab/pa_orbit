@@ -1,0 +1,347 @@
+---
+title: "PA ORBIT - Main Fig. 5"
+author: 'Scott H. Saunders'
+date: '2026'
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    code_folding: show
+    toc: yes
+    df_print: paged
+---
+
+
+```{r  warning=FALSE, message=FALSE}
+library(tidyverse)
+library(ggrepel)
+library(cowplot)
+library(patchwork)
+
+theme_figure <- function () {
+  theme_classic( ) %+replace%
+    theme(
+      axis.line = element_line(color = 'black', size = 0.25),
+      axis.ticks = element_line(color = 'black', size =0.25),
+      axis.text = element_text(color = 'black', size=7),
+      axis.title=element_text(color = 'black', size=7),
+      strip.text = element_text(color = 'black', size = 7),
+      strip.background = element_blank(),
+      legend.background = element_blank(),
+      legend.title=element_text(color = 'black',size=7),
+      legend.text=element_text(color = 'black',size=7),
+      legend.text.align=0,
+      panel.spacing = unit(0,'cm'),
+      plot.margin = margin(t=0.25, b = 0.25, l = 0.25, r = 0.25, unit = 'cm'),
+      plot.title = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.subtitle = element_text(hjust = 0.5, color = 'black', size = 7),
+      plot.caption = element_text(color = 'black', size = 8)
+    )
+}
+
+Mb_label <- function(x){
+  #e.g. 2 to 2x
+  lab <- paste(x / 1000000, " Mb", sep = '')
+}
+
+kb_label <- function(x){
+  #e.g. 2 to 2x
+  lab <- paste(x / 1000, " kb", sep = '')
+}
+
+theme_set(theme_figure())
+
+knitr::opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=FALSE, echo = TRUE, message=FALSE, warning=FALSE, fig.align="center", fig.retina = 2)
+
+```
+
+# Match read counts to targets
+
+```{r}
+df_fusion_TOs <- read_csv("../../data/high_throughput/2025_08_27_sundar_60_oligos_TOpos.csv")
+
+df_fusion_TOs 
+
+```
+
+```{r}
+df_all_reads_std <- read_csv("../../data/high_throughput/2025_10_22_PA_hypo_abx_counts.csv") %>% 
+  separate(file_name, into = c('sample','R1','degron.bam'), sep = '_', remove = F) %>% 
+  separate(sample, into = c('condition','replicate'), sep = '-', remove = T) %>% 
+  separate(degron.bam, into = c('degron',NA))
+
+df_all_reads_std
+
+df_all_reads_perfect <- read_csv("../../data/high_throughput/2026_01_13_PA_hypo_abx_paired_perfect_first_counts.csv") %>% 
+  separate(file_name, into = c('sample','degron.bam'), sep = '_', remove = F) %>% 
+  separate(sample, into = c('condition','replicate'), sep = '-', remove = T) %>% 
+  separate(degron.bam, into = c('degron',NA))
+
+df_all_reads_perfect
+
+```
+
+
+```{r}
+df_fwd_targets_std <- left_join(df_all_reads_std %>% filter(strand == '-'),
+                            df_fusion_TOs %>% filter(Direction == '+') %>% select(-width),
+                            by = c('stop_pos'='TO_left'))
+
+df_fwd_targets_perfect <- left_join(df_all_reads_perfect %>% filter(strand.first == '-'),
+                            df_fusion_TOs %>% filter(Direction == '+') %>% select(-width),
+                            by = c('stop_pos'='TO_left'))
+
+
+```
+
+
+
+```{r}
+
+
+df_rev_targets_std <- left_join(df_all_reads_std %>% filter(strand == '+'),
+                            df_fusion_TOs %>% filter(Direction == '-') %>% select(-width),
+                            by = c('stop_pos'='TO_right'))
+
+df_rev_targets_perfect <- left_join(df_all_reads_perfect %>% filter(strand.first == '+'),
+                            df_fusion_TOs %>% filter(Direction == '-') %>% select(-width),
+                            by = c('stop_pos'='TO_right'))
+
+df_all_targets_std <- bind_rows(df_fwd_targets_std, df_rev_targets_std)
+
+df_all_targets_perfect <- bind_rows(df_fwd_targets_perfect, df_rev_targets_perfect)
+
+df_all_targets_std_perf <- left_join(df_all_targets_std%>% filter(!is.na(Genes)),
+                                     df_all_targets_perfect %>% filter(!is.na(Genes)) %>% 
+                                       select(strand = strand.first, stop_pos, n_perf = n, condition, replicate, degron, Genes, gene_id),
+                                     by = c('strand','stop_pos','condition','replicate','degron','Genes','gene_id')) %>% 
+  mutate(n_perf = ifelse(is.na(n_perf), 0, n_perf)) #if no perfect matches, return zero instead of NA
+
+df_all_targets_std_perf %>% select(Genes, degron, condition, replicate, n, n_perf)
+```
+
+# Fig. 5B Example genes
+
+```{r}
+
+
+plot_gyrB <- df_all_targets_std %>% 
+                      filter(condition == 'T0') %>% 
+                      mutate(locus = case_when(
+                        stop_pos > 0 & stop_pos < 7500 ~ 'gyrB', 
+                        stop_pos > 750073 & stop_pos < 750573 ~ 'rpoB',
+                        stop_pos > 2258000 & stop_pos < 2258700 ~ 'etfA'))%>% 
+  filter(locus %in% c('gyrB')) %>% 
+  filter(condition == 'T0') %>% 
+  group_by(gene_name, stop_pos, condition, locus) %>% 
+  summarise(n = sum(n)) %>% 
+  ggplot(  aes(x = stop_pos, y = n)) + 
+  geom_col(fill = 'light gray') + 
+  geom_col(data = df_all_targets_perfect %>% 
+             filter(gene_name == 'gyrB' & condition == 'T0') %>% 
+             group_by(gene_name, stop_pos, condition) %>% 
+             summarise(n = sum(n)), 
+           fill ='#AB85AC', color = 'black' ) + 
+  scale_y_log10(labels = scales::label_log()) +
+  labs(y = 'Reads', x = 'Genomic position') + 
+  xlim( 6692 - 50, 6692+10)
+
+#plot_gyrB
+
+
+#------------
+
+plot_rpoB <- df_all_targets_std %>% 
+                      filter(condition == 'T0') %>% 
+                      mutate(locus = case_when(
+                        stop_pos > 0 & stop_pos < 7500 ~ 'gyrB', 
+                        stop_pos > 750073 & stop_pos < 750573 ~ 'rpoB',
+                        stop_pos > 2258000 & stop_pos < 2258700 ~ 'etfA'))%>% 
+  filter(locus %in% c('rpoB')) %>% 
+  filter(condition == 'T0') %>% 
+  group_by(gene_name, stop_pos, condition, locus) %>% 
+  summarise(n = sum(n)) %>% 
+  ggplot(  aes(x = stop_pos, y = n)) + 
+  geom_col(fill = 'light gray') + 
+  geom_col(data = df_all_targets_perfect %>% 
+             filter(gene_name == 'rpoB' & condition == 'T0') %>% 
+             group_by(gene_name, stop_pos, condition) %>% 
+             summarise(n = sum(n)), 
+           fill ='#AB85AC', color = 'black' ) + 
+  scale_y_log10(labels = scales::label_log()) +
+  labs(y = 'Reads', x = 'Genomic position') + 
+  xlim( 750273 - 50, 750273+10)
+
+#plot_rpoB
+
+plot_etfA <- df_all_targets_std %>% 
+                      filter(condition == 'T0') %>% 
+                      mutate(locus = case_when(
+                        stop_pos > 0 & stop_pos < 7500 ~ 'gyrB', 
+                        stop_pos > 750073 & stop_pos < 750573 ~ 'rpoB',
+                        stop_pos > 2258000 & stop_pos < 2258700 ~ 'etfA'))%>% 
+  filter(locus %in% c('etfA')) %>% 
+  filter(condition == 'T0') %>% 
+  group_by(gene_name, stop_pos, condition, locus) %>% 
+  summarise(n = sum(n)) %>% 
+  ggplot(  aes(x = stop_pos, y = n)) + 
+  geom_col(fill = 'light gray') + 
+  geom_col(data = df_all_targets_perfect %>% 
+             filter(gene_name == 'etfA' & condition == 'T0') %>% 
+             group_by(gene_name, stop_pos, condition) %>% 
+             summarise(n = sum(n)), 
+           fill ='#AB85AC', color = 'black' ) + 
+  scale_y_log10(labels = scales::label_log()) +
+  labs(y = 'Reads', x = 'Genomic position') + 
+  xlim( 2258566 - 50, 2258566+10)
+
+#plot_etfA
+
+plot_reads <- plot_grid(plot_gyrB, plot_rpoB, plot_etfA, ncol = 1, align = 'hv', axis = 'tblr')
+
+plot_reads
+
+```
+
+```{R}
+perfect_totals <- df_all_targets_perfect %>% filter(condition == 'T0') %>% filter(gene_name %in% c('gyrB','rpoB','etfA')) %>%  group_by( gene_name) %>% 
+  summarise(perfect_n = sum(n))
+
+df_all_targets_std %>% 
+                      filter(condition == 'T0') %>% 
+                      mutate(locus = case_when(
+                        stop_pos > (6692 - 50) & stop_pos < (6692 +10) ~ 'gyrB', 
+                        stop_pos > (750273 - 50) & stop_pos < (750273+10) ~ 'rpoB',
+                        stop_pos > (2258566 - 50) & stop_pos < (2258566+10) ~ 'etfA'))%>% 
+  filter(locus %in% c('gyrB','rpoB','etfA')) %>% 
+    mutate(correct_loc = ifelse(is.na(gene_name), F, T)) %>% 
+  group_by( locus, correct_loc) %>% 
+  summarise(n = sum(n)) %>% 
+  pivot_wider(names_from = correct_loc, values_from = n, names_prefix = 'n_') %>% 
+  mutate(n_total = n_TRUE + n_FALSE) %>% 
+  left_join(., perfect_totals, by = c('locus' = 'gene_name')) %>% 
+  mutate(perfect_rate = perfect_n / n_total, correct_loc_rate = n_TRUE / n_total)
+
+
+```
+
+# Fig. 5C Genome wide targets
+
+```{r}
+
+# df_all_targets_perfect %>% filter(condition == 'T0') %>%
+#                         mutate(perfect = ifelse(is.na(gene_name), F, T)) %>% 
+#     group_by(perfect) %>% summarise(n=sum(n))
+
+plot_genome <- ggplot(df_all_targets_perfect %>% filter(condition == 'T0') %>%
+                        mutate(perfect = ifelse(is.na(gene_name), F, T)) %>% 
+                        group_by(condition, stop_pos, gene_name, perfect) %>%
+                        summarise(n = sum(n)), 
+                      aes(x = stop_pos, y = n, alpha = perfect, fill = perfect)) +
+  geom_vline(data = . %>% filter(perfect) %>% filter(gene_name %in% c('rho','fis','yqgF','gyrB','purA','nrdB', 'lptE','grpE','asd'))  %>% group_by(gene_name, stop_pos) %>% summarise(), 
+            aes(xintercept = stop_pos), color = 'light gray')+
+  geom_point(shape = 21, stroke = 0.25) + 
+  geom_text(data = . %>% filter( perfect) %>% filter(gene_name %in% c('rho','fis','yqgF','gyrB','purA','nrdB', 'lptE','grpE','asd')) %>% ungroup(), 
+            aes(label = gene_name,y = 1e7), size = 2.75)+
+  scale_y_log10(labels = scales::label_log())+ 
+  scale_fill_manual(values = c(NA, '#AB85AC'))+
+  scale_alpha_manual(values = c(0.5, 1))+
+  scale_x_continuous(labels = Mb_label)+
+  labs(x = 'Genomic position', y = 'Total T0 Reads (sum of all degrons)') + guides( alpha = 'none', fill = 'none')
+
+plot_genome
+
+
+
+```
+
+# Fig. 5D Degron traces
+
+```{r}
+
+df_counts_zeros <- df_all_targets_perfect %>% 
+  filter(!is.na(gene_name)) %>% 
+  filter(condition != 'subpool') %>% 
+  select(condition, gene_name, n, degron, replicate) %>% 
+  pivot_wider(names_from = c( condition, replicate, degron), values_from = n) %>% 
+  mutate( across(everything(), ~replace_na(.x, 0))) %>% 
+  pivot_longer(-gene_name, names_to = c('condition','replicate','degron'),values_to = 'n', names_sep= '_')
+
+plot_degron_traces <- ggplot(df_counts_zeros %>% 
+         filter(!is.na(gene_name)) %>% 
+         filter(gene_name %in% c('rho','fis','yqgF','gyrB','purA','nrdB', 'lptE','grpE','asd')) %>% 
+         mutate(gene_name = factor(gene_name, levels = c('rho','fis','yqgF','gyrB','purA','nrdB','lptE','grpE','asd'))) %>% 
+          mutate(degron = factor(degron, levels = c('stop','ASV','LAA','LVA'))) %>% 
+         mutate(id = paste(gene_name, condition, sep = '_')) %>% 
+         filter( condition %in% c('T0','LB')), 
+       aes(x = degron, y = n)) + 
+  geom_path(data = . %>% group_by(id, degron, gene_name, condition) %>% summarise(avg_n = mean(n)), 
+            aes(y = avg_n, group = id, linetype = condition), color = '#AB85AC', linewidth = 0.5) +
+  geom_jitter(width = 0.1, shape = 21, size = 1.5, stroke = 0.25, aes(fill = degron)) + 
+  scale_y_log10(labels = scales::label_log()) + 
+  facet_wrap(~gene_name, ncol = 3) + 
+  scale_fill_manual(values = c('white',"#EBCDE2", '#AB85AC', '#705B73'))+
+  labs(y = 'Reads') + guides(fill ='none', color = 'none', linetype = 'none') + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+plot_degron_traces
+
+```
+
+# Fig. 5E Degron heatmap
+
+```{r}
+
+gene_order <- df_counts_zeros %>% filter(condition == 'T0' ) %>% filter(gene_name != 'off_target') %>% group_by(gene_name) %>% 
+  summarise(total_reads = sum(n)) %>% 
+  filter(total_reads >0) %>% 
+  arrange(total_reads) %>% pull(gene_name)
+
+plot_t0_heatmap <- ggplot(df_counts_zeros %>% 
+         filter(condition == 'T0') %>% 
+         filter(gene_name %in% gene_order) %>% 
+         mutate(gene_name = factor(gene_name, levels = gene_order)) %>% 
+         #arrange(desc(n)) %>% 
+         mutate(degron = factor(degron, levels = c('stop','ASV','LAA','LVA'))) %>% 
+         group_by(gene_name, degron, condition) %>% 
+         summarise(n=sum(n)+1), 
+         aes(x = degron, y = gene_name, fill = n)) + geom_tile() +
+  #facet_wrap(~condition) + 
+  scale_fill_viridis_c(transform = 'log10', na.value = 'light gray', labels = scales::label_log()) +
+  labs(y = 'Gene targets') + theme( axis.text.x = element_text(angle = 45, hjust = 1), legend.position = 'bottom')
+
+plot_t0_heatmap
+
+```
+# Absent genes at T0
+
+```{r}
+
+
+absent_genes <- left_join(df_fusion_TOs, df_all_targets_perfect %>% filter(condition == 'T0') %>% 
+                            group_by(gene_name) %>% summarise(reads = sum(n)), 
+                          by = 'gene_name') %>% 
+  filter(is.na(reads)) %>% select(gene_name) %>% mutate(degron = 'none', reads = 0)
+
+absent_genes
+
+```
+
+# Assemble figure
+
+```{r}
+
+fig_left <- plot_grid(NULL, plot_reads, plot_genome, plot_degron_traces, ncol = 2, scale = 0.95)
+
+
+fig <- plot_grid( fig_left, plot_t0_heatmap, ncol = 2, rel_widths = c(3,1))
+
+fig
+
+#save_plot('PA_ORBIT_main_fig_6_pooled_hypo.pdf', fig, base_width = 7.2835, base_height = 5)
+```
+
+```{r}
+
+sessionInfo()
+
+```

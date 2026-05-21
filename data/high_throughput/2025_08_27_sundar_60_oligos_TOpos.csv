@@ -1,0 +1,181 @@
+seqnames,width,type,locus_tag,loctype,note,gene_synonym,gene_id,prod_note,product,left_pos,right_pos,Genes,Direction,fwd,center_pos,long_tooltip,gene_name,ess_category,sub_loc,function_cat,ess,lead_ess,lead_dir,lag_ess,lag_dir,lead_gene,lag_gene,conflict,keep,oligo_seq,TO_left,TO_right
+UCBPP-PA14,2421,gene,PA14_00050,normal,NA,NA,PA14_00050,NA,DNA gyrase subunit B,4275,6695,gyrB,+,TRUE,5485,"<center>gyrB | PA14_00050</center>
+ left: 4275 | right: 6695 | direction: +
+ product: DNA gyrase subunit B",gyrB,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,-,FALSE,+,PA14_00060,recF,FALSE,TRUE,AAAAGAAAACCCCGGCGCCAGGCCGGGGTTTCCATGAGGGTCGGTCTGCCGACCTGatgatcctgacgacggagaccgccgtcgtcgacaagccCACGTCCAGGTTCGACACCGCCAGCGCGTTGCTTTCGATGAAGTCGCGGCGCGGCT,6692,6696
+UCBPP-PA14,507,gene,PA14_04580,normal,NA,NA,PA14_04580,NA,dihydrofolate reductase,407469,407975,folA,+,TRUE,407722,"<center>folA | PA14_04580</center>
+ left: 407469 | right: 407975 | direction: +
+ product: dihydrofolate reductase",folA,Core,cytoplasmic,Metabolism,TRUE,FALSE,-,FALSE,+,PA14_04590,PA14_04570,FALSE,TRUE,TGGCGGGGAAGAAGATCGAGGCGGAGCTGATCACCCTCTGACCCCGCCTGGAACCGatgatcctgacgacggagaccgccgtcgtcgacaagccGCGGCGCTCCCATACCTCGAAGGCGTAGGCAGGCGCATCGTCAGCCGCGGCGTGTT,407972,407976
+UCBPP-PA14,252,gene,PA14_04750,normal,NA,NA,PA14_04750,NA,ferredoxin (4Fe-4S),420999,421250,fdx1,-,FALSE,421124.5,"<center>fdx1 | PA14_04750</center>
+ left: 420999 | right: 421250 | direction: -
+ product: ferredoxin (4Fe-4S)",fdx1,Core,cytoplasmic,Metabolism,TRUE,TRUE,-,FALSE,-,coaD,PA14_04730,FALSE,TRUE,ATGTCGAGAGCAAGGACCAGTTGATGGAGAAATACCGGAAGATCACCGGCAAGGCCggcttgtcgacgacggcggtctccgtcgtcaggatcatTCCCCGCCGGCGCCTGTCCTTCAGGGACGGTTCGCGCCCCGTCCGACGCGCTTTTG,420998,421002
+UCBPP-PA14,855,gene,PA14_04930,normal,NA,NA,PA14_04930,NA,RNA polymerase sigma-32 factor,435419,436273,rpoH,+,TRUE,435846,"<center>rpoH | PA14_04930</center>
+ left: 435419 | right: 436273 | direction: +
+ product: RNA polymerase sigma-32 factor",rpoH,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,+,FALSE,+,PA14_04940,ftsX,FALSE,TRUE,TCCGGGCAGAAAAAAACCGCACCCTTGCGGGGTGCGGTTTTCGCGAGGCGCGGCGAatgatcctgacgacggagaccgccgtcgtcgacaagccGGCGAGAATCCGCCCTTTCAGCTTGCTCATGGCGTTCTTTTCCAGCTGCCGGATAC,436270,436274
+UCBPP-PA14,435,gene,PA14_05280,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA0404,NA,PA14_05280,NA,putative ribonuclease,461077,461511,yqgF,-,FALSE,461294,"<center>yqgF | PA14_05280</center>
+ left: 461077 | right: 461511 | direction: -
+ product: putative ribonuclease",yqgF,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,-,FALSE,-,algH,pyrR,FALSE,TRUE,TGGACGCCCTGGCCGCCGCCCTGCTGCTGGAAGGCTGGCTGGCCGAACACCCGGATggcttgtcgacgacggcggtctccgtcgtcaggatcatCCCATGGCAGCCGGCACGCCGCCGGTTGCCATTATGCTTTCGCCACCGCGGGCGCC,461076,461080
+UCBPP-PA14,1065,gene,PA14_07230,normal,NA,NA,PA14_07230,NA,"fructose-1,6-bisphosphate aldolase",623313,624377,fda,+,TRUE,623845,"<center>fda | PA14_07230</center>
+ left: 623313 | right: 624377 | direction: +
+ product: fructose-1,6-bisphosphate aldolase",fda,Core,cytoplasmic,Metabolism,TRUE,FALSE,+,FALSE,+,PA14_07240,PA14_07210,FALSE,TRUE,CCGGGGCGGATGTGCAAGAGCCCCGACCAGCGGGGCTCCCGTTCGAACGAAGGCGCatgatcctgacgacggagaccgccgtcgtcgacaagccGTTGACCTTCGGATCCAGCTCGCCGCGAGCGTAGCGCTGGAACATGCCTTCCAGGG,624374,624378
+UCBPP-PA14,1854,gene,PA14_07520,normal,NA,NA,PA14_07520,NA,sigma factor RpoD,647191,649044,rpoD,-,FALSE,648117.5,"<center>rpoD | PA14_07520</center>
+ left: 647191 | right: 649044 | direction: -
+ product: sigma factor RpoD",rpoD,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,-,FALSE,-,dnaG,PA14_07500,FALSE,TRUE,TGCGCAAGCTGCGCCATCCGTCGCGAAGCGAGCACCTGCGCTCCTTCCTCGACGAGggcttgtcgacgacggcggtctccgtcgtcaggatcatCGAACGAACCCCCGGCCTGAAAAACCGGGGGTTTTTCTTTGCCGCTTGCCCCGCCG,647190,647194
+UCBPP-PA14,1995,gene,PA14_07530,normal,NA,NA,PA14_07530,NA,putative DNA primase,649124,651118,dnaG,-,FALSE,650121,"<center>dnaG | PA14_07530</center>
+ left: 649124 | right: 651118 | direction: -
+ product: putative DNA primase",dnaG,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,-,TRUE,-,PA14_07550,rpoD,TRUE,TRUE,AGAAAGCCTTGCTCAGAGAGCACTACAGTGTTGCCGCTTCATCGCCTTCCCAGAGCggcttgtcgacgacggcggtctccgtcgtcaggatcatACTGGCGCCTCAGCCCAGGCATCAGGTATAATCCTCTGCTTATTTTTTGCCCGCCA,649123,649127
+UCBPP-PA14,648,gene,PA14_08400,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA0655,NA,PA14_08400,NA,putative ubiquinone biosynthesis protein,719519,720166,PA14_08400,-,FALSE,719842.5,"<center>PA14_08400 | PA14_08400</center>
+ left: 719519 | right: 720166 | direction: -
+ product: putative ubiquinone biosynthesis protein",COQ7,Core,cytoplasmic,Metabolism,TRUE,FALSE,-,FALSE,+,PA14_08420,speD,FALSE,TRUE,TGAAGCTGGGCATGAGCCTGCTGGCGAAGGTGATGACCAAGAGCACCTACCGCATCggcttgtcgacgacggcggtctccgtcgtcaggatcatATCGCACGCATGAAAAAGCCCGCTCGAAGCGGGCTTTTTCTTTCTCGTGTGCGATC,719518,719522
+UCBPP-PA14,534,gene,PA14_08710,normal,NA,NA,PA14_08710,NA,transcription antitermination protein NusG,743059,743592,nusG,+,TRUE,743325.5,"<center>nusG | PA14_08710</center>
+ left: 743059 | right: 743592 | direction: +
+ product: transcription antitermination protein NusG",nusG,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,FALSE,+,rplK,secE,TRUE,TRUE,CCAGTGACGACAAAACCCCGCAGCCTTGGGCTGCGGGGTGAGGGATGCGTTTTCAGatgatcctgacgacggagaccgccgtcgtcgacaagccGACCTTTTCGACCTGACTGAACTCCAGCTCCACCGGGGTAGAGCGGCCAAAGATGA,743589,743593
+UCBPP-PA14,501,gene,PA14_08740,normal,NA,NA,PA14_08740,NA,50S ribosomal protein L10,745034,745534,rplJ,+,TRUE,745284,"<center>rplJ | PA14_08740</center>
+ left: 745034 | right: 745534 | direction: +
+ product: 50S ribosomal protein L10",rplJ,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,+,TRUE,+,rplL,rplA,FALSE,TRUE,GACGGCCTGCGGCCATCGTATTAAACAAATAAGATTGAAAGCGCTTGCGAGCCGACatgatcctgacgacggagaccgccgtcgtcgacaagccGGCGGCAGCAGCTTCTTTCTGGTCGCGAATGGCCGCCAGAGTACGAGCCAGCTTGC,745531,745535
+UCBPP-PA14,4074,gene,PA14_08760,normal,NA,NA,PA14_08760,NA,DNA-directed RNA polymerase beta chain,746203,750276,rpoB,+,TRUE,748239.5,"<center>rpoB | PA14_08760</center>
+ left: 746203 | right: 750276 | direction: +
+ product: DNA-directed RNA polymerase beta chain",rpoB,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,FALSE,+,rpoC,rplL,TRUE,TRUE,TCCTCACGGACCCGGTGCGACCGGCCTTGACCAGCCGCACCGTCTAGCGTCACGTGatgatcctgacgacggagaccgccgtcgtcgacaagccTTCGGTTTCCAGTTCGATGTCGATGCCGAGCGAACGGATCTCTTTGATCAGAACGT,750273,750277
+UCBPP-PA14,4200,gene,PA14_08780,normal,NA,NA,PA14_08780,NA,DNA-directed RNA polymerase beta* chain,750342,754541,rpoC,+,TRUE,752441.5,"<center>rpoC | PA14_08780</center>
+ left: 750342 | right: 754541 | direction: +
+ product: DNA-directed RNA polymerase beta* chain",rpoC,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,TRUE,+,rpsL,rpoB,TRUE,TRUE,TACACCGTCAAGACAAAGCCCCGGCTATCGGGATAGCCGGGGCTTGTCGTTGATGCatgatcctgacgacggagaccgccgtcgtcgacaagccGTTACCGCTCGAGTTCAGCGCTTCGGTCAGTGCGGCTTCCGCCTCGCTGGCACTCA,754538,754542
+UCBPP-PA14,372,gene,PA14_08790,normal,NA,NA,PA14_08790,NA,30S ribosomal protein S12,754693,755064,rpsL,+,TRUE,754878.5,"<center>rpsL | PA14_08790</center>
+ left: 754693 | right: 755064 | direction: +
+ product: 30S ribosomal protein S12",rpsL,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,TRUE,+,rpsG,rpoC,TRUE,TRUE,CAGTCAAGTTACGCCCGACCTTACTCTTATCGACTCAGATAAATATAAAAACGCTAatgatcctgacgacggagaccgccgtcgtcgacaagccCTTCGGACGCTTGGCGCCGTACTTCGAACGACCCTGCTTACGGTCTTTGACACCCG,755061,755065
+UCBPP-PA14,1122,gene,PA14_11400,normal,NA,NA,PA14_11400,NA,riboflavin-specific deaminase/reductase,988435,989556,ribD,+,TRUE,988995.5,"<center>ribD | PA14_11400</center>
+ left: 988435 | right: 989556 | direction: +
+ product: riboflavin-specific deaminase/reductase",ribD,Core,cytoplasmic,Metabolism,TRUE,TRUE,+,FALSE,+,ribC,ybaD,TRUE,TRUE,TTTTACCACAGTTGCGCCGCTTGTGCATCGTCCGCCGCGTCGCCGCGCAGCGAAGTatgatcctgacgacggagaccgccgtcgtcgacaagccAGCGTCCCGCGGATGGGGCCGCGCGGTGACCAGCCAGTCGTCGCCCACCGCGCGGA,989553,989557
+UCBPP-PA14,1884,gene,PA14_11550,normal,NA,NA,PA14_11550,NA,1-deoxyxylulose-5-phosphate synthase,997819,999702,dxs,-,FALSE,998760.5,"<center>dxs | PA14_11550</center>
+ left: 997819 | right: 999702 | direction: -
+ product: 1-deoxyxylulose-5-phosphate synthase",dxs,Core,cytoplasmic,Metabolism,TRUE,TRUE,-,FALSE,+,ispA,PA14_11530,FALSE,TRUE,GCGGCCTGGATGCCGCGGGCATCGAAAAGGCGGTACGCCAGCGTCTCGACCGGCAGggcttgtcgacgacggcggtctccgtcgtcaggatcatCGCCAAACCCAGCGACAACGGCGAATAACCGCGTTGCGGTTATTCGCCCTACCCCC,997818,997822
+UCBPP-PA14,624,gene,PA14_12210,normal,NA,NA,PA14_12210,NA,hypothetical protein,1054720,1055343,PA14_12210,-,FALSE,1055031.5,"<center>PA14_12210 | PA14_12210</center>
+ left: 1054720 | right: 1055343 | direction: -
+ product: hypothetical protein",lptE,Core,outermembrane,Transport and chaperones,TRUE,TRUE,-,TRUE,-,leuS,holA,TRUE,TRUE,AGCGCCAGCGCCGCGCCGCCGAGCCGCAGCAGTCGCCGATCGAGTTCCCCACCCCGggcttgtcgacgacggcggtctccgtcgtcaggatcatTGCCCCGGGGCCGGTTTCGCCGGCCCCGTCTTCTCCTATGAAGCTGACTCCCGCGC,1054719,1054723
+UCBPP-PA14,1119,gene,PA14_14500,normal,NA,NA,PA14_14500,NA,putative permease,1239195,1240313,yjgP,+,TRUE,1239754,"<center>yjgP | PA14_14500</center>
+ left: 1239195 | right: 1240313 | direction: +
+ product: putative permease",yjgP,Core,cytoplasmic membrane,Transport and chaperones,TRUE,TRUE,+,FALSE,+,yjgQ,PA14_14490,TRUE,TRUE,CCCCGAGCACCGCGAGGATCGCGACGAAGACGGTGACACCGATGTAACGATCGAGCatgatcctgacgacggagaccgccgtcgtcgacaagccACCATGCGCCACCTCGCGACCGGCACGGGAGGACGCCAGCTTCAGGCGCAAGGGTT,1240310,1240314
+UCBPP-PA14,1068,gene,PA14_14510,normal,NA,NA,PA14_14510,NA,putative permease,1240306,1241373,yjgQ,+,TRUE,1240839.5,"<center>yjgQ | PA14_14510</center>
+ left: 1240306 | right: 1241373 | direction: +
+ product: putative permease",yjgQ,Core,cytoplasmic membrane,Transport and chaperones,TRUE,FALSE,-,TRUE,+,PA14_14520,yjgP,FALSE,TRUE,GAAGCACAAAGGCCACCCGTGGGTGGCCTTTTTTCATACCCGGCCTGCCGGGCCTGatgatcctgacgacggagaccgccgtcgtcgacaagccGCCCGCCCGGCGTAGCAGCCAGACACCCGCCAGTGCGCAGATCGAGGCGGGGATCA,1241370,1241374
+UCBPP-PA14,522,gene,PA14_14770,normal,NA,NA,PA14_14770,NA,heat shock protein HscB,1256352,1256873,hscB,+,TRUE,1256612.5,"<center>hscB | PA14_14770</center>
+ left: 1256352 | right: 1256873 | direction: +
+ product: heat shock protein HscB",hscB,Core,cytoplasmic,Transport and chaperones,TRUE,TRUE,+,TRUE,+,hscA,icsA,TRUE,TRUE,TGCAGTAGGGCCATGCTCTGTCTTAACTATGGGGTGCGACCCGGGGGCCGCAGGGAatgatcctgacgacggagaccgccgtcgtcgacaagccATCGTCGAGTCGCTCTTCCAGCTGGCGCACTTCCTGCGCGAGCTTGTCGAGGAACT,1256870,1256874
+UCBPP-PA14,549,gene,PA14_15680,normal,NA,NA,PA14_15680,NA,putative Cytosine/adenosine deaminase,1333891,1334439,cumB,+,TRUE,1334165,"<center>cumB | PA14_15680</center>
+ left: 1333891 | right: 1334439 | direction: +
+ product: putative Cytosine/adenosine deaminase",cumB,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,+,FALSE,+,PA14_15700,cumA,FALSE,TRUE,GGCGCCATGGCGTGCTTTAACGTTTCAGCCGGAGCGTTCGAAAAGAGAAACATCCGatgatcctgacgacggagaccgccgtcgtcgacaagccGTCTTCGCGAGGCTTCTTCGCCGCTTCGCGCCGCGCGCGGAAGAACGCCGAGAGCG,1334436,1334440
+UCBPP-PA14,1506,gene,PA14_16530,normal,NA,NA,PA14_16530,NA,lysyl-tRNA synthetase,1415600,1417105,lysS,+,TRUE,1416352.5,"<center>lysS | PA14_16530</center>
+ left: 1415600 | right: 1417105 | direction: +
+ product: lysyl-tRNA synthetase",lysS,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,+,TRUE,+,PA14_16550,PA14_16510,FALSE,TRUE,CGCGCGGCCATGAAAAAACCGCCCGAAGGCGGCTTTTCCATGGACTGTTGCGGCGCatgatcctgacgacggagaccgccgtcgtcgacaagccGGCCTGCGGGCGCATGTGCGGGAACAGGATCACGTCGCGGATCGACGGCGAGTTGG,1417102,1417106
+UCBPP-PA14,648,gene,PA14_16700,normal,NA,NA,PA14_16700,NA,adenylate kinase,1430423,1431070,adk,+,TRUE,1430746.5,"<center>adk | PA14_16700</center>
+ left: 1430423 | right: 1431070 | direction: +
+ product: adenylate kinase",adk,Core,cytoplasmic,Metabolism,TRUE,TRUE,+,FALSE,+,yeaZ,ppc,TRUE,TRUE,CGCCCCGGAAACGCCGACGGCCCGCAAGCGGGCCGTCGGTGCTACAGCGCTGCGGAatgatcctgacgacggagaccgccgtcgtcgacaagccGCTCAGGGCCGAAAGCACTTTCGCGGTGATCTGCTCGACCGAGCCGACGCCGGCGA,1431067,1431071
+UCBPP-PA14,3522,gene,PA14_17260,normal,NA,NA,PA14_17260,NA,"DNA polymerase III, alpha subunit",1479332,1482853,dnaE,+,TRUE,1481092.5,"<center>dnaE | PA14_17260</center>
+ left: 1479332 | right: 1482853 | direction: +
+ product: DNA polymerase III, alpha subunit",dnaE,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,FALSE,+,accA,yaaJ,TRUE,TRUE,CGATCCGCGTTTTCCCGCCGCAGAGCGCGGAACAACGGCGTTATCGCCCATCGCGAatgatcctgacgacggagaccgccgtcgtcgacaagccACGATAATTGAGGAAGACGTTGTCGCGCCCGAACTGGTCACGCAATGCCTGGATCA,1482850,1482854
+UCBPP-PA14,951,gene,PA14_17270,normal,NA,NA,PA14_17270,NA,"acetyl-CoA carboxylase, carboxyl transferase,alpha subunit",1483003,1483953,accA,+,TRUE,1483478,"<center>accA | PA14_17270</center>
+ left: 1483003 | right: 1483953 | direction: +
+ product: acetyl-CoA carboxylase, carboxyl transferase,alpha subunit",accA,Core,cytoplasmic,Metabolism,TRUE,TRUE,+,TRUE,+,mesJ,dnaE,TRUE,TRUE,ATGCGACAAGCCCGGCGAATGCCGGGCTTGTCGATCGTACCAGTGCGCCGGATGGTatgatcctgacgacggagaccgccgtcgtcgacaagccCGGCGCGCCGTAGCTCATCAGGCGGTCGTAACGACGCTCCAGCAACTCACCCATTT,1483950,1483954
+UCBPP-PA14,1329,gene,PA14_17280,normal,NA,NA,PA14_17280,NA,putative cell cycle protein,1484023,1485351,mesJ,+,TRUE,1484687,"<center>mesJ | PA14_17280</center>
+ left: 1484023 | right: 1485351 | direction: +
+ product: putative cell cycle protein",mesJ,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,TRUE,+,pyrG,accA,TRUE,TRUE,GAGGGAATCGGCGGGAGCAGTACAAGACGGGAGCGTAGTCTACTGGAAACGGCTTAatgatcctgacgacggagaccgccgtcgtcgacaagccGCTCAAACCCGGGTCGTTCGTCGGCGGGCTCCAGGACAGTCGCCAGCCCCCCTCGC,1485348,1485352
+UCBPP-PA14,2766,gene,PA14_23260,normal,NA,NA,PA14_23260,NA,DNA gyrase subunit A,2014754,2017519,gyrA,+,TRUE,2016136.5,"<center>gyrA | PA14_23260</center>
+ left: 2014754 | right: 2017519 | direction: +
+ product: DNA gyrase subunit A",gyrA,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,FALSE,+,serC,PA14_23250,TRUE,TRUE,CGTGAGTTATCCGCCGACGTCATCGGCCGGGCGGGCGCAGGCGCCCGCCCCGAGCCatgatcctgacgacggagaccgccgtcgtcgacaagccCTCTTCGTTGCCTTCCGCTTCCGCCGCGGGCTCGGACTCGGCCGACTCGCCCAGAG,2017516,2017520
+UCBPP-PA14,1113,gene,PA14_23800,normal,NA,NA,PA14_23800,NA,aspartate semialdehyde dehydrogenase,2067690,2068802,asd,+,TRUE,2068246,"<center>asd | PA14_23800</center>
+ left: 2067690 | right: 2068802 | direction: +
+ product: aspartate semialdehyde dehydrogenase",asd,Core,cytoplasmic,Metabolism,TRUE,FALSE,+,TRUE,+,PA14_23810,leuB,FALSE,TRUE,GCCCACCTTCGCCCAGGCAATCGAGGCGCCGCCCATTGCGGGCGGCGCCGGATCGAatgatcctgacgacggagaccgccgtcgtcgacaagccGCGCTCCAGCAGAATCCGCAGCATGCGCCGCAGCGGCTCGGCAGCGCCCCACAGCA,2068799,2068803
+UCBPP-PA14,2607,gene,PA14_25110,normal,NA,NA,PA14_25110,NA,DNA topoisomerase I,2196651,2199257,topA,+,TRUE,2197954,"<center>topA | PA14_25110</center>
+ left: 2196651 | right: 2199257 | direction: +
+ product: DNA topoisomerase I",topA,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,+,FALSE,+,PA14_25130,PA14_25100,FALSE,TRUE,AGCGCCCGGCCTTCGCGCAGTATAAGCGCGCCCCATGCAAGCGGGCGCGCCATCCAatgatcctgacgacggagaccgccgtcgtcgacaagccGCGCTTGTCTTCGACCTTCCACTTGCCGCCATCGTAGAAGGCGCGCCAGCCGGTGG,2199254,2199258
+UCBPP-PA14,1302,gene,PA14_25450,normal,NA,NA,PA14_25450,NA,"putative lipoprotein releasing system, permeaseprotein",2224228,2225529,lolE,+,TRUE,2224878.5,"<center>lolE | PA14_25450</center>
+ left: 2224228 | right: 2225529 | direction: +
+ product: putative lipoprotein releasing system, permeaseprotein",lolE,Core,cytoplasmic membrane,Transport and chaperones,TRUE,FALSE,-,TRUE,+,PA14_25470,lolD,FALSE,TRUE,CGGCTTTTTCGTGGGCCTTGTCCGCCCCGTGCAGGGACTGGCGCAGGCCTTCTCGCatgatcctgacgacggagaccgccgtcgtcgacaagccCTCGTAGCGCAGCGACTCGGCCGGTTGTGTCCGCGCCGCGCGCCAGGATGGGTACA,2225526,2225530
+UCBPP-PA14,1020,gene,PA14_25550,normal,NA,NA,PA14_25550,NA,UDP-N-acetylpyruvoylglucosamine reductase,2232097,2233116,murB,+,TRUE,2232606.5,"<center>murB | PA14_25550</center>
+ left: 2232097 | right: 2233116 | direction: +
+ product: UDP-N-acetylpyruvoylglucosamine reductase",murB,Core,cytoplasmic,Metabolism,TRUE,TRUE,-,FALSE,+,rne,ptpA,FALSE,TRUE,CGCACAATGAAAAAGGGATGCCGCCGGCATCCCTTTTTCATTCTCCAGCCGCACCCatgatcctgacgacggagaccgccgtcgtcgacaagccGTAGAGATTGGGTTCAGGCTCCAATTCGACGCCGAAACGCCGACGGACGTCCTCCT,2233113,2233117
+UCBPP-PA14,3174,gene,PA14_25560,normal,NA,NA,PA14_25560,NA,ribonuclease E,2233274,2236447,rne,-,FALSE,2234860.5,"<center>rne | PA14_25560</center>
+ left: 2233274 | right: 2236447 | direction: -
+ product: ribonuclease E",rne,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,+,TRUE,+,rluC,murB,FALSE,TRUE,CCGACACAGAGCACGCGAAAAAGACCGAGGAAAGCGAAACCTCGCGCCCGCATGCCggcttgtcgacgacggcggtctccgtcgtcaggatcatGTGACAGGCTGAAAAAAGGGGATGCCATGGCATCCCCTTTTTTTGCGCGCCATTCC,2233273,2233277
+UCBPP-PA14,930,gene,PA14_25880,normal,NA,NA,PA14_25880,NA,electron transfer flavoprotein alpha-subunit,2257640,2258569,etfA,+,TRUE,2258104.5,"<center>etfA | PA14_25880</center>
+ left: 2257640 | right: 2258569 | direction: +
+ product: electron transfer flavoprotein alpha-subunit",etfA,Core,cytoplasmic,Metabolism,TRUE,TRUE,+,TRUE,+,PA14_25900,etfB,TRUE,TRUE,CCCGGACATAAAAAAACCCGCTCCGGGGAGCGGGTCTTGTCGGCTTGGAATCGGGCatgatcctgacgacggagaccgccgtcgtcgacaagccGACGGCCTTTTCCAGCTCCGGTACGGCGTCGAACAGGTCGGCGACCAGGCCGTAGT,2258566,2258570
+UCBPP-PA14,1197,gene,PA14_25900,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA2950,NA,PA14_25900,NA,putative short-chain alcohol dehydrogenase,2258754,2259950,PA14_25900,+,TRUE,2259352,"<center>PA14_25900 | PA14_25900</center>
+ left: 2258754 | right: 2259950 | direction: +
+ product: putative short-chain alcohol dehydrogenase",fabV,Core,cytoplasmic,Metabolism,TRUE,FALSE,-,TRUE,+,PA14_25910,etfA,FALSE,TRUE,CTGGGCGCCGGTTCGGGGGAGCGGGAACCGTCGCGAGGACGGCTCGGATCCAGGCCatgatcctgacgacggagaccgccgtcgtcgacaagccGGCCTGGATCAGGTTGGCGATCTGCACGTCCGGGTTGACGTCCTGCTCGTAGTCGA,2259947,2259951
+UCBPP-PA14,1017,gene,PA14_28690,normal,NA,NA,PA14_28690,NA,"phenylalanyl-tRNA synthetase, alpha-subunit",2470426,2471442,pheS,+,TRUE,2470934,"<center>pheS | PA14_28690</center>
+ left: 2470426 | right: 2471442 | direction: +
+ product: phenylalanyl-tRNA synthetase, alpha-subunit",pheS,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,TRUE,+,pheT,rplT,TRUE,TRUE,GCCACTTTTCACTGAATTTCATCCTGTTCTCCTAAGGAATCCGGTTGCGTTCTGGCatgatcctgacgacggagaccgccgtcgtcgacaagccGCGGAATTGTCCGAGGAAGCGCAGATCGTTATCGAAGAACAGACGCAGGTCGTTCA,2471439,2471443
+UCBPP-PA14,1371,gene,PA14_30110,normal,NA,NA,PA14_30110,NA,adenylosuccinate lyase,2607840,2609210,purB,-,FALSE,2608525,"<center>purB | PA14_30110</center>
+ left: 2607840 | right: 2609210 | direction: -
+ product: adenylosuccinate lyase",purB,Core,cytoplasmic,Metabolism,TRUE,FALSE,-,FALSE,-,PA14_30130,PA14_30100,FALSE,TRUE,AGAAGCTGACCCCGGCCGGCTACGTCGGCAATGCCGCCGCCCAGGCCAAGCGCATCggcttgtcgacgacggcggtctccgtcgtcaggatcatGCACGCAACCCTTTTGCACGCCCGGCTGCGCCGGGCGTTTTTGTTTCAAGGACTTA,2607839,2607843
+UCBPP-PA14,561,gene,PA14_30670,normal,NA,NA,PA14_30670,NA,CDP-diacylglycerol--glycerol-3-phosphate3-phosphatidyltransferase,2658009,2658569,pgsA,+,TRUE,2658289,"<center>pgsA | PA14_30670</center>
+ left: 2658009 | right: 2658569 | direction: +
+ product: CDP-diacylglycerol--glycerol-3-phosphate3-phosphatidyltransferase",pgsA,Core,cytoplasmic membrane,Metabolism,TRUE,FALSE,+,FALSE,+,PA14_30680,uvrC,FALSE,TRUE,ACGGGCGCCATTCTATAGCATCGCGGCGCCGTGTCAACTCCTTGATTCAAAAAAGTatgatcctgacgacggagaccgccgtcgtcgacaagccTTTCTCTTTCGGGGTGGTCGACAGATGCGGCCACGCGGCCAGCAGGTAGTGCACCA,2658566,2658570
+UCBPP-PA14,741,gene,PA14_41050,normal,NA,NA,PA14_41050,NA,"DNA polymerase III, epsilon chain",3660468,3661208,dnaQ,-,FALSE,3660838,"<center>dnaQ | PA14_41050</center>
+ left: 3660468 | right: 3661208 | direction: -
+ product: DNA polymerase III, epsilon chain",dnaQ,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,-,FALSE,+,rnhA,PA14_41030,FALSE,TRUE,CCTTGCTGGTGGAGCGGGCGACGCGCTGAACGCGGCGCCCGTGGTGCATGGGCAGGatgatcctgacgacggagaccgccgtcgtcgacaagccTTCGCCGACCGGCGCTTCCAGTTGCGCCCAGAGCGACGGACCACCTGCCGACTTCT,3660467,3660471
+UCBPP-PA14,855,gene,PA14_41350,normal,NA,NA,PA14_41350,NA,"5,10-methylene-tetrahydrofolate dehydrogenase",3687635,3688489,folD,+,TRUE,3688062,"<center>folD | PA14_41350</center>
+ left: 3687635 | right: 3688489 | direction: +
+ product: 5,10-methylene-tetrahydrofolate dehydrogenase",folD,Core,cytoplasmic,Metabolism,TRUE,TRUE,-,FALSE,-,cysS,PA14_41340,FALSE,TRUE,TGACCCGCGCCTGCCTGCTGGAAAATACCCTGCACGCCGCCGAACACCTGCACGACggcttgtcgacgacggcggtctccgtcgtcaggatcatGGTCGCCGGTAATGAAAAGCCCCGCGAACGCGGGGCTTTTCATTTATCGCTGCGGG,3688486,3688490
+UCBPP-PA14,1383,gene,PA14_41360,normal,NA,NA,PA14_41360,NA,cysteinyl-tRNA synthetase,3688547,3689929,cysS,-,FALSE,3689238,"<center>cysS | PA14_41360</center>
+ left: 3688547 | right: 3689929 | direction: -
+ product: cysteinyl-tRNA synthetase",cysS,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,-,TRUE,+,glnS,folD,FALSE,TRUE,GTCGCCGGTAATGAAAAGCCCCGCGAACGCGGGGCTTTTCATTTATCGCTGCGGGTatgatcctgacgacggagaccgccgtcgtcgacaagccGTCGGCCAGGCGCCAGGTAGTGCCGCCCTTGCCATCCTCCAGCACCACGCCCATGG,3688546,3688550
+UCBPP-PA14,723,gene,PA14_41400,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA1792,NA,PA14_41400,NA,"putative UDP-2,3-diacylglucosamine hydrolase",3692234,3692956,PA14_41400,+,TRUE,3692595,"<center>PA14_41400 | PA14_41400</center>
+ left: 3692234 | right: 3692956 | direction: +
+ product: putative UDP-2,3-diacylglucosamine hydrolase",lpxH,Core,cytoplasmic,Metabolism,TRUE,FALSE,+,FALSE,+,PA14_41420,ppiB,FALSE,TRUE,AGGGCTGGGCCCTGGAGATCGACGCCAATGGCCATCGCCAGGCACCCTTCCCGCTCggcttgtcgacgacggcggtctccgtcgtcaggatcatCCCACCCAGGCCCGCCATGCGGGCCTTTCAGCGAAACATTATGCGATTCGCATTTT,3692953,3692957
+UCBPP-PA14,2610,gene,PA14_41470,normal,NA,NA,PA14_41470,NA,aconitate hydratase 2,3697030,3699639,acnB,+,TRUE,3698334.5,"<center>acnB | PA14_41470</center>
+ left: 3697030 | right: 3699639 | direction: +
+ product: aconitate hydratase 2",acnB,Core,cytoplasmic,Metabolism,TRUE,FALSE,+,FALSE,-,nasS,PA14_41450,FALSE,TRUE,AGATCGCCGAGTTCCGCGAAGCGGCTGCGAACGCCAAGATCCCGGTCGTTCAGGCCggcttgtcgacgacggcggtctccgtcgtcaggatcatTCCAGCGACGCGTCGAACAAGCCCCGCCCCGTGCGGGGCTTTTTCTTGCCCGGCGA,3699636,3699640
+UCBPP-PA14,1437,gene,PA14_43970,normal,NA,NA,PA14_43970,NA,lipoamide dehydrogenase-glc,3913657,3915093,lpdG,-,FALSE,3914375,"<center>lpdG | PA14_43970</center>
+ left: 3913657 | right: 3915093 | direction: -
+ product: lipoamide dehydrogenase-glc",lpdG,Core,cytoplasmic,Metabolism,TRUE,TRUE,-,TRUE,-,sucB,sucC,TRUE,TRUE,ACGACGCGTCCCGCGTCGCTGTGACGCCCCTGGCGTGAACCGGGGCGTCGGATCACatgatcctgacgacggagaccgccgtcgtcgacaagccGCGCTTCTTGCGGTTGGCGATGTGGATGGCATGGCCATTCACCGCCAGGGCAGCTT,3913656,3913660
+UCBPP-PA14,729,gene,PA14_49340,normal,NA,NA,PA14_49340,NA,PcpS,4384093,4384821,pcpS,+,TRUE,4384457,"<center>pcpS | PA14_49340</center>
+ left: 4384093 | right: 4384821 | direction: +
+ product: PcpS",pcpS,Core,cytoplasmic,Metabolism,TRUE,FALSE,-,FALSE,+,PA14_49350,PA14_49330,FALSE,TRUE,ATGCCCAGTTCGCCGTGCTCGACGAACGCCTGCTCAGCCTGGTGGCGGTCGGCGCCggcttgtcgacgacggcggtctccgtcgtcaggatcatTCAGGCGTTCCCCGGCGTGCGCCGCGACGGCCGCAGCGCGCGGCCTTCCGCCAGGC,4384818,4384822
+UCBPP-PA14,2892,gene,PA14_49460,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA1156,NA,PA14_49460,NA,"ribonucleoside reductase, large chain",4394703,4397594,nrdA,+,TRUE,4396148.5,"<center>nrdA | PA14_49460</center>
+ left: 4394703 | right: 4397594 | direction: +
+ product: ribonucleoside reductase, large chain",nrdA,Core,cytoplasmic,Metabolism,TRUE,TRUE,+,FALSE,-,nrdB,PA14_49440,TRUE,TRUE,CGGCGCCGGTGCCGCAGGCATGCAGCATCGATAACCCCGACTGCGAAGCCTGCCAGggcttgtcgacgacggcggtctccgtcgtcaggatcatTCGCGCGTCGCTGAACGGCGTCCGTGTCGTGGCCGGGCAAGCCGGACTCCTCGAGT,4397591,4397595
+UCBPP-PA14,1248,gene,PA14_49470,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA1155,NA,PA14_49470,NA,"ribonucleoside reductase, small chain",4397858,4399105,nrdB,+,TRUE,4398481.5,"<center>nrdB | PA14_49470</center>
+ left: 4397858 | right: 4399105 | direction: +
+ product: ribonucleoside reductase, small chain",nrdB,Core,cytoplasmic,Metabolism,TRUE,FALSE,+,TRUE,+,PA14_49480,nrdA,FALSE,TRUE,ACTTCTTCGAGACGCGGGTTATCGAGTACCAGACGGGCGGTGCCTTGAGCTGGGATggcttgtcgacgacggcggtctccgtcgtcaggatcatTGATGGTGTAAAAAGTCGAGACCATTAGTAGCGCTGTGCCACCACATGGATTGTTG,4399102,4399106
+UCBPP-PA14,705,gene,PA14_52010,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA0947,NA,PA14_52010,NA,conserved hypothetical protein,4615576,4616280,PA14_52010,-,FALSE,4615928,"<center>PA14_52010 | PA14_52010</center>
+ left: 4615576 | right: 4616280 | direction: -
+ product: conserved hypothetical protein",hda,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,-,FALSE,+,PA14_52020,PA14_52000,FALSE,TRUE,GAAACCCAAGGACTGCGGCACGGCCATGCGGGAGTTCGCCGACGGACTGTCGACGCatgatcctgacgacggagaccgccgtcgtcgacaagccCCAGCCGAGGGTTTCCTTGAGGAAAGGAATGGTCAGCTTGCGCTGAGCCTGGAGCG,4615575,4615579
+UCBPP-PA14,1494,gene,PA14_57940,normal,NA,NA,PA14_57940,NA,RNA polymerase sigma-54 factor,5156461,5157954,rpoN,+,TRUE,5157207.5,"<center>rpoN | PA14_57940</center>
+ left: 5156461 | right: 5157954 | direction: +
+ product: RNA polymerase sigma-54 factor",rpoN,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,+,TRUE,+,PA14_57950,PA14_57930,FALSE,TRUE,CCAAATACCGCGAATCCCTGGGCATAGCCCCTTCGAGCGAGCGCAAGCGACTGGTGggcttgtcgacgacggcggtctccgtcgtcaggatcatCGTTGATCCACGCCAAGGTGTTCCGGAGGCAGGTTGCTAACCTGCCACTTACACAC,5157951,5157955
+UCBPP-PA14,495,gene,PA14_58120,normal,NA,NA,PA14_58120,NA,rod shape-determining protein MreD,5174419,5174913,mreD,-,FALSE,5174666,"<center>mreD | PA14_58120</center>
+ left: 5174419 | right: 5174913 | direction: -
+ product: rod shape-determining protein MreD",mreD,Core,cytoplasmic membrane,Cell structure and division,TRUE,TRUE,-,FALSE,-,mreC,maf,FALSE,TRUE,CGATCACCCGTTTCGAAGAATGACGATATCCGCCGCAGCATAGCTGCGAAGCGGACatgatcctgacgacggagaccgccgtcgtcgacaagccCCTCACGTTGAGACGCAGGCGGACGAACTGCAGCAGGGCGTACACCCAGGGCCAGA,5174418,5174422
+UCBPP-PA14,1539,gene,PA14_60390,normal,NA,NA,PA14_60390,NA,"putative virulence factor, membrane protein",5383305,5384843,mviN,-,FALSE,5384074,"<center>mviN | PA14_60390</center>
+ left: 5383305 | right: 5384843 | direction: -
+ product: putative virulence factor, membrane protein",mviN,Core,cytoplasmic membrane,Transport and chaperones,TRUE,TRUE,+,TRUE,-,rpsT,ribF,TRUE,TRUE,CCGGGCGCCGGACAACAGGCAAAACGGCATGATCCCGCCGCCAGCCCGGACGCGCTatgatcctgacgacggagaccgccgtcgtcgacaagccCAGCACCGCCCGACGGGAAAAGTCGCGCAGGCGGAAACCCAGCAGCGCGAGCATAC,5383304,5383308
+UCBPP-PA14,2523,gene,PA14_62760,normal,NA,NA,PA14_62760,NA,translation initiation factor IF-2,5599356,5601878,infB,-,FALSE,5600617,"<center>infB | PA14_62760</center>
+ left: 5599356 | right: 5601878 | direction: -
+ product: translation initiation factor IF-2",infB,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,-,FALSE,-,nusA,rbfA,FALSE,TRUE,ACAAACGCCCGGGACAGCTGGAAGCCGGCCCGGGCGCTGTGGTTACGCACTCGCCAatgatcctgacgacggagaccgccgtcgtcgacaagccAAGGCTGCGTGCGACTTCGACCTTCTCGAACACTTCGATCTTGTCGCCGACCTTGA,5599355,5599359
+UCBPP-PA14,561,gene,PA14_62990,normal,NA,NA,PA14_62990,NA,heat shock protein GrpE,5621130,5621690,grpE,-,FALSE,5621410,"<center>grpE | PA14_62990</center>
+ left: 5621130 | right: 5621690 | direction: -
+ product: heat shock protein GrpE",grpE,Core,cytoplasmic,Transport and chaperones,TRUE,FALSE,+,TRUE,-,recN,dnaK,TRUE,TRUE,CCGCCCGTGGGTCTCGTGCTCGGTTGACTACCCAGATGGGGTCGTCGCGTCGAATTatgatcctgacgacggagaccgccgtcgtcgacaagccAGCCTGCTCGTCGATGGAAGGCGGGGTTTCCGCCGGCGCCTTGCTGACCACCACCA,5621129,5621133
+UCBPP-PA14,324,gene,PA14_64190,normal,NA,NA,PA14_64190,NA,DNA-binding protein Fis,5719308,5719631,fis,+,TRUE,5719469.5,"<center>fis | PA14_64190</center>
+ left: 5719308 | right: 5719631 | direction: +
+ product: DNA-binding protein Fis",fis,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,+,FALSE,+,purH,yhdG,TRUE,TRUE,TGCTCGGCCTGAACCGCGGGACCCTGCGCAAGAAACTCAAGCAATACGACCTTCTTggcttgtcgacgacggcggtctccgtcgtcaggatcatGAGCGGCGGCGGGCTCCGGCCAAGGGCGCGCGTCCCGGCCGGCACCCGCGGCCGGA,5719628,5719632
+UCBPP-PA14,1395,gene,PA14_65130,normal,NA,NA,PA14_65130,NA,replicative DNA helicase,5805538,5806932,dnaB,-,FALSE,5806235,"<center>dnaB | PA14_65130</center>
+ left: 5805538 | right: 5806932 | direction: -
+ product: replicative DNA helicase",dnaB,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,-,FALSE,-,rplI,alr,FALSE,TRUE,TGCAACTGAAACGGGTGCCTATGGTAAGGCGCCCGCCGGGCAAGACCCAAGCCGGGatgatcctgacgacggagaccgccgtcgtcgacaagccTTCGTCCTCGAAGTTGTACATGCCGGCGGCAAGGTTCTCGAAGCGCGTGTATTTGC,5805537,5805541
+UCBPP-PA14,1293,gene,PA14_65230,normal,NA,NA,PA14_65230,NA,adenylosuccinate synthetase,5813463,5814755,purA,-,FALSE,5814109,"<center>purA | PA14_65230</center>
+ left: 5813463 | right: 5814755 | direction: -
+ product: adenylosuccinate synthetase",purA,Core,cytoplasmic,Metabolism,TRUE,TRUE,-,FALSE,+,hisX,PA14_65220,FALSE,TRUE,GGAAATGAAAACGGGCCGCATGCGCAGCCCGTTCCGTCATCGCCCCGCTATCCGCCatgatcctgacgacggagaccgccgtcgtcgacaagccGGCGAATGGATGGCGCAGGATGATGGTTTCGTTGCGATCCGGACCGGTGGAGATGA,5813462,5813466
+UCBPP-PA14,1539,gene,PA14_65570,normal,corresponds to Pseudomonas aeruginosa strain PAO1locus PA4961,NA,PA14_65570,NA,conserved hypothetical protein,5840480,5842018,PA14_65570,+,TRUE,5841249,"<center>PA14_65570 | PA14_65570</center>
+ left: 5840480 | right: 5842018 | direction: +
+ product: conserved hypothetical protein",-,Core,cytoplasmic membrane,"Replication, Transcription, Translation",TRUE,FALSE,+,TRUE,-,ybcI,serB,FALSE,TRUE,CGTATCCGTCGATGCTCGAGCGCCAACTGGCGCGCATGCACGACCGCGCCCGCCCGggcttgtcgacgacggcggtctccgtcgtcaggatcatCCACCCTGATCACCCACCCGCTGCCGGTCCTGGCGGTGGGACTGGCCCTTGGCAGC,5842015,5842019
+UCBPP-PA14,2265,gene,PA14_65605,normal,NA,NA,PA14_65605,NA,topoisomerase IV subunit A,5843612,5845876,parC,-,FALSE,5844744,"<center>parC | PA14_65605</center>
+ left: 5843612 | right: 5845876 | direction: -
+ product: topoisomerase IV subunit A",parC,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,FALSE,-,FALSE,-,PA14_65630,PA14_65590,FALSE,TRUE,GCTTTCGCCATTCTCTTGCGGATATGCGAGAGATCGGAGACCGGTAACGGCTCATTatgatcctgacgacggagaccgccgtcgtcgacaagccATCCTGTGGCGGAATATCCACCAGCAGGCTGTCGACGCGCTGGAAACCGCGCGGCA,5843611,5843615
+UCBPP-PA14,1278,gene,PA14_65960,normal,NA,NA,PA14_65960,NA,3-deoxy-D-manno-octulosonic-acid (KDO)transferase,5875218,5876495,waaA,-,FALSE,5875856.5,"<center>waaA | PA14_65960</center>
+ left: 5875218 | right: 5876495 | direction: -
+ product: 3-deoxy-D-manno-octulosonic-acid (KDO)transferase",kdtA,Core,cytoplasmic,Metabolism,TRUE,FALSE,-,FALSE,+,PA14_65970,PA14_65950,FALSE,TRUE,CGTTCTGAAACGGCCTGTCGCGATGCAGGGCCAGGGGAGGGCCGACGGGGCGAGCGatgatcctgacgacggagaccgccgtcgtcgacaagccCCCGCCGCGCCCGAGCAACCGCGCCAACCCCGCCAGCAGCCGCTCCAGGGCGCCCT,5875217,5875221
+UCBPP-PA14,1260,gene,PA14_69190,normal,NA,NA,PA14_69190,NA,transcription termination factor Rho,6171078,6172337,rho,-,FALSE,6171707.5,"<center>rho | PA14_69190</center>
+ left: 6171078 | right: 6172337 | direction: -
+ product: transcription termination factor Rho",rho,Core,cytoplasmic,"Replication, Transcription, Translation",TRUE,TRUE,-,FALSE,-,trxA,PA14_69170,FALSE,TRUE,GCATGAAAAAAGGCGCTCCGGTCAAACCGGAGCGCCTTCTTCAATTCCCTGGAAGAatgatcctgacgacggagaccgccgtcgtcgacaagccCTTCCGTTTCATCGAATCGAAGAACTCATCGTTGGTCTTGGTCTGCTTGAGCTTGT,6171077,6171081
+UCBPP-PA14,1737,gene,PA14_73410,normal,NA,NA,PA14_73410,NA,"putative inner membrane protein, 60 kDa",6535072,6536808,yidC,-,FALSE,6535940,"<center>yidC | PA14_73410</center>
+ left: 6535072 | right: 6536808 | direction: -
+ product: putative inner membrane protein, 60 kDa",yidC,Core,cytoplasmic membrane,Transport and chaperones,TRUE,FALSE,-,TRUE,-,rnpA,thdF,TRUE,TRUE,ATAGCAAGACGCCCCTCGAGGGGGCGTCTTGTTGTGGACAGTTTTCGCGATAGACGatgatcctgacgacggagaccgccgtcgtcgacaagccGGCGGTCTTCGCGGCTGCCTCGATCTTGCGGGTAATGTACCACTGCTGTGCGATCG,6535071,6535075
