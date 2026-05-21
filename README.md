@@ -10,7 +10,7 @@ The continual advancement of genetic tools has been critical to our modern under
 
 ### Resources
 
-biorXiv preprint (TBD)
+[biorXiv preprint](https://www.biorxiv.org/cgi/content/short/2026.05.19.726351v1)
 
 Addgene plasmids (TBD)
 
